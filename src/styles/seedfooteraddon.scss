@@ -1,0 +1,66 @@
+.seedfooter__container {
+  background-image: url(../img/happy-farmer-in-the-corn-field-1.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: auto;
+}
+
+.wrapper-main.seedfooter__wrapper {
+  @media screen and (max-width: 1120px) {
+    width: auto;
+    height: auto;
+  }
+}
+
+.seedfooter__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 110px 10px;
+}
+
+.seedfooter__titel {
+  position: relative;
+  color: var(--white);
+  margin-left: 50px;
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 32px;
+    height: 25px;
+    background-image: url(../img/grenn-style-ico.svg);
+    left: -46px;
+    top: 14px;
+
+    @media screen and (max-width: 600px) {
+      top: 0px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 1.375rem;
+  }
+}
+
+.seedfooter__text {
+  margin-top: 20px;
+  color: var(--white);
+  text-align: left;
+
+  @media screen and (max-width: 600px) {
+    color: rgba(255, 255, 255, .6);
+  }
+
+  @media screen and (max-width: 550px) {
+    &:nth-last-child(1) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 465px) {
+    &:nth-last-child(2) {
+      display: none;
+    }
+  }
+}

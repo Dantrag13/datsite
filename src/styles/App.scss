@@ -1,0 +1,144 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Bold.woff2") format("woff2"), url("../fonts/Montserrat-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-SemiBold.woff2") format("woff2"), url("../fonts/Montserrat-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Light.woff2") format("woff2"), url("../fonts/Montserrat-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular.woff2") format("woff2"), url("../fonts/Montserrat-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  font-size: 16px;
+  --green-dark: #1E6140;
+  --green-dark-hover: #347153;
+  --green-light: #84C551;
+  --brown-red: #8C3213;
+  --color-search: #484848;
+  --orange: #E74E13;
+  --peach-bg: rgba(140, 50, 19, .06);
+  --gray-light: #CCCCCC;
+
+
+  --white: #FFFFFF;
+  --black: #000000;
+}
+
+body,
+body *,
+body *::before,
+body *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-style: normal;
+  max-width: 1920px;
+  overflow-x: hidden;
+
+  @media screen and (max-width: 976px) {
+    &.lock {
+      overflow: hidden;
+    }
+  }
+
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3.438rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2.813rem;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 2.188rem;
+}
+
+h5 {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+h6 {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+button {
+  font-family: Montserrat;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.wrapper-main {
+  width: 1124px;
+  margin: 0 auto;
+}
+
+.title__2leaves {
+  display: inline-block;
+  position: relative;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url(../img/grenn-style-ico.svg);
+    width: 32px;
+    height: 25px;
+    top: 20px;
+  }
+
+  &::before {
+    left: -50px;
+  }
+
+  &::after {
+    right: -50px;
+    transform: scaleX(-1);
+  }
+}

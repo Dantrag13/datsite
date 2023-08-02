@@ -1,0 +1,209 @@
+.agri-store-bg {
+  background-image: url(../img/harvest-ripening-of-tomatoes-in-a-greenhouse.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% auto;
+  position: relative;
+  min-height: 780px;
+  z-index: -2;
+
+  @media screen and (max-width: 800px) {
+    background-size: 100% 100%;
+  }
+
+  @media screen and (max-width: 670px) {
+    min-height: auto;
+  }
+}
+
+.wrapper-main.agri-store__wrapper {
+  @media screen and (max-width: 1150px) {
+    width: auto;
+  }
+}
+
+.agri-store__container {
+  a {
+    cursor: pointer;
+
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 90px;
+  }
+
+  @media screen and (max-width: 920px) {
+    justify-content: center;
+    padding-bottom: 120px;
+  }
+
+  @media screen and (max-width: 800px) {
+    justify-content: center;
+    padding-bottom: 40px;
+  }
+
+  @media screen and (max-width: 500px) {
+    justify-content: center;
+    padding-bottom: 20px;
+  }
+}
+
+.agri-store__title {
+  position: relative;
+  padding: 170px 0px 0px 50px;
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 32px;
+    height: 25px;
+    background-image: url(../img/grenn-style-ico.svg);
+    left: 1px;
+    top: 198px;
+
+    @media screen and (max-width: 1100px) {
+      top: 128px;
+    }
+
+    @media screen and (max-width: 800px) {
+      top: 78px;
+    }
+
+    @media screen and (max-width: 500px) {
+      top: 58px;
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    padding-top: 100px;
+  }
+
+  @media screen and (max-width: 800px) {
+    padding-top: 50px;
+    font-size: 2.5rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: 10px;
+    font-size: 1.563rem;
+  }
+}
+
+.agri-store__sub-title {
+  font-weight: 300;
+  font-size: 3.438rem;
+  margin-top: 4px;
+  margin-left: 50px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 2.5rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: 10px;
+    font-size: 1.563rem;
+  }
+}
+
+.agri-store__tex {
+  color: rgba(0, 0, 0, .5);
+  font-size: 1.125rem;
+  max-width: 560px;
+  margin-top: 16px;
+  margin-left: 50px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 1rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: 10px;
+  }
+}
+
+.agri-store__img-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  &::before {
+    position: absolute;
+    content: '';
+    background-image: url(../img/leavs1.png);
+    width: 200px;
+    height: 200px;
+    left: -160px;
+    top: 240px;
+    z-index: 3;
+
+    @media screen and (max-width: 1100px) {
+      display: none;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url(../img/leave2.png);
+    width: 278px;
+    height: 171px;
+    right: -110px;
+    top: 20px;
+    z-index: 3;
+
+    @media screen and (max-width: 1100px) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    position: relative;
+    margin-top: 20px;
+  }
+
+}
+
+.agri-store__img-container {
+  position: relative;
+
+  img {
+    display: block;
+    border-radius: 50% 0 50% 0;
+    max-width: 43vw;
+    max-height: 692px;
+
+    @media screen and (max-width: 800px) {
+      max-width: 80vw;
+    }
+
+    @media screen and (max-width: 500px) {
+      max-width: 90vw;
+    }
+  }
+}
+
+.agri-store__button {
+  display: inline-block;
+  font-family: 'Montserrat';
+  border-color: var(--orange);
+  border-radius: 50px;
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 16px 50px;
+  margin: 24px 0px 0px 50px;
+  outline: none;
+
+  @media screen and (max-width: 500px) {
+    margin: 20px auto;
+  }
+}

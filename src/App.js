@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Footer from './components/Footer/Footer';
+import GoodsStore from './components/GoodsStore/GoodsStore';
+import Header from './components/Header/Header';
+import ProductPage from './components/ProductPage/ProductPage';
+import Main from './components/Main/Main';
+import './styles/App.scss';
+import ProductCartProvider from './components/ProductCart/ProductCart';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ProductCartProvider>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/store' element={<GoodsStore />} >
+            <Route index element={<GoodsStore />} />
+            <Route path='seeds' element={<GoodsStore />} />
+            <Route path='plant-protection' element={<GoodsStore />} />
+            <Route path='fertilizers' element={<GoodsStore />} />
+            <Route path='feed-group' element={<GoodsStore />} />
+            <Route path='agro-to-help' element={<GoodsStore />} />
+          </Route>
+          <Route path='/product' element={<ProductPage />} />
+        </Routes>
+        <Footer />
+      </ProductCartProvider>
+    </>
   );
 }
 
