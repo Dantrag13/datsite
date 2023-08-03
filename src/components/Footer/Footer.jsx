@@ -7,6 +7,10 @@ import phone_ico from "../../img/phone-ico.svg"
 import { Link } from 'react-router-dom'
 
 function Footer() {
+
+  function smoothScrollTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   return (
     <div className="footer__container">
       <div className="wrapper-main footer__wprapper">
@@ -52,9 +56,11 @@ function Footer() {
         </div>
         <hr className="footer__hr" />
         <div className="footer__copy">© 2022 DAT</div>
-        <a className="footer__arrow__up" href="#header"><img src={arrow} alt="arrow" /></a>
+        <span className="footer__arrow__up" href="#header" onClick={smoothScrollTop}>
+          <img src={arrow} alt="arrow" />
+        </span>
       </div>
-    </div>
+    </div >
   )
 }
 

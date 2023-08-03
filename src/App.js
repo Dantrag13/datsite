@@ -7,6 +7,7 @@ import ProductPage from './components/ProductPage/ProductPage';
 import Main from './components/Main/Main';
 import './styles/App.scss';
 import ProductCartProvider from './components/ProductCart/ProductCart';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
             <Route path='agro-to-help' element={<GoodsStore />} />
           </Route>
           <Route path='/product' element={<ProductPage />} />
+          <Route path='*' element={<Main />} />
         </Routes>
-        {/* <Route path='*' element={<Main />} /> */}
         <Footer />
+        <ScrollToTop />
       </ProductCartProvider>
     </>
   );

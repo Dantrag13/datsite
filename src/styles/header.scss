@@ -392,7 +392,6 @@ nav {
   padding: 10px;
   gap: 10px;
   top: -32px;
-  // left: 576px;
   transition: all 0.3s ease 0s;
 
   img {
@@ -409,19 +408,6 @@ nav {
   &:hover a:nth-child(4) {
     display: block;
   }
-
-  // @media screen and (max-width: 1140px) {
-  //   left: 530px;
-  // }
-
-  // @media screen and (max-width: 998px) {
-  //   left: 440px;
-  //   top: -4px;
-  // }
-
-  // @media screen and (max-width: 900px) {
-  //   display: none;
-  // }
 }
 
 .phones__group {
@@ -462,6 +448,7 @@ nav {
 .cart__summary {
   font-weight: 700;
   font-size: .75rem;
+  min-width: 64px;
 }
 
 .header__icon__item {
