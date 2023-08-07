@@ -39,6 +39,7 @@ function ProductCartProvider({ children }) {
     // const newItem = [...productCart, { ...product, incart: 1 }];
     // setProductCart(newItem);
   }
+  console.log(productCart);
 
 
   return (

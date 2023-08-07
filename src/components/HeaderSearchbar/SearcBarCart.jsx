@@ -20,9 +20,10 @@ function SearcBarCart() {
   useEffect(() => {
     if (myCart.cart.length > 0) {
       let money = 0;
-      let items = myCart.cart.length;
+      let items = 0;
       myCart.cart.forEach((item) => {
-        money += Number(item.price);
+        money += (Number(item.price) * Number(item.incart));
+        items += Number(item.incart);
       });
       setCartTotalPrice(money);
       setCartItemsCount(items);
