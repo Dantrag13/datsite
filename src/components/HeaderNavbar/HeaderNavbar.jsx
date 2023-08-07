@@ -10,12 +10,10 @@ function HeaderNavbar() {
   function showElem(e) {
     if ((window.innerWidth < 976) && (e.target.classList.contains('navbar__forward__link') || e.target.classList.contains('navigation__main'))) {
       setBurgerActive(false);
-      console.log('showElem Work');
     }
   }
 
   useEffect(() => {
-    console.log('NavbarUseEffect');
     if (burgerActive) {
       body.classList.add('lock');
     } else {

@@ -21,7 +21,6 @@ function BigProductCard({ product }) {
     e.preventDefault();
     myCart.addToCart(product);
   }
-  console.log(myCart.cart);
 
   return (
     <>
@@ -118,8 +117,7 @@ function BigProductCard({ product }) {
         </div>
       </div>
     </>
-  )
+  );
 }
-// onClick={myCart.addToCart(product)}
 
 export default BigProductCard;

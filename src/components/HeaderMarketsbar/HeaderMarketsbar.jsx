@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function HeaderMarketsbar() {
-
-  useEffect(() => {
-    console.log('MarketsUseEffect');
-  });
 
   return (
     <div className="markets-sections">
@@ -180,7 +176,7 @@ function HeaderMarketsbar() {
         </ul>
       </div>
     </div>
-  )
+  );
 }
 
-export default HeaderMarketsbar
+export default HeaderMarketsbar;

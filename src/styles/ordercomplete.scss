@@ -1,0 +1,133 @@
+.order__complete {
+  background-image: url(../img/happy-farmer-in-the-corn-field331.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-top: 48px;
+}
+
+.wrapper-main.order__complete__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 162px 5px 196px;
+
+  @media screen and (max-width: 1160px) {
+    width: auto;
+  }
+}
+
+
+.order__complete__title {
+  color: var(--white);
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+
+  &::before,
+  &::after {
+    background-image: url(../img/grenn-style-ico.svg);
+    content: "";
+    height: 25px;
+    position: absolute;
+    top: 20px;
+    width: 32px;
+  }
+
+  &::before {
+    left: -40px;
+  }
+
+  &::after {
+    right: -40px;
+    transform: scaleX(-1);
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.875rem;
+
+    &::before,
+    &::after {
+      top: 6px;
+    }
+  }
+
+  @media screen and (max-width: 388px) {
+    font-size: 1.375rem;
+
+    &::before {
+      left: -36px;
+    }
+
+    &::after {
+      right: -36px;
+    }
+  }
+}
+
+.order__complete__text {
+  color: var(--white);
+  font-size: 1.25rem;
+  margin-top: 24px;
+  max-width: 450px;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.order__complete__btn__wrapper {
+  display: flex;
+  gap: 20px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.order__complete__go-buy__btn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--white);
+  border-radius: 20px;
+  padding: 12px 20px;
+  border: 1px solid var(--orange);
+  outline: none;
+  background-color: var(--orange);
+  cursor: pointer;
+
+  path {
+    fill: var(--white)
+  }
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+.order__complete__go-home__btn {
+  color: var(--white);
+  border-radius: 20px;
+  padding: 12px 20px;
+  border: 1px solid var(--white);
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--white);
+    background-color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+}

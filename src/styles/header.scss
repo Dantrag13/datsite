@@ -330,7 +330,6 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
-  // margin-left: 30px;
 
   @media screen and (max-width: 1140px) {
     margin-left: 20px;
@@ -460,6 +459,7 @@ nav {
   border: 1px solid var(--brown-red);
   border-radius: 50%;
   position: relative;
+  cursor: pointer;
 
 
   &:hover {

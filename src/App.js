@@ -8,6 +8,7 @@ import Main from './components/Main/Main';
 import './styles/App.scss';
 import ProductCartProvider from './components/ProductCart/ProductCart';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import OrderComplete from './components/OrderComplete/OrderComplete';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='feed-group' element={<GoodsStore />} />
             <Route path='agro-to-help' element={<GoodsStore />} />
           </Route>
+          <Route path='/order-complete' element={<OrderComplete />} />
           <Route path='/product' element={<ProductPage />} />
           <Route path='*' element={<Main />} />
         </Routes>
