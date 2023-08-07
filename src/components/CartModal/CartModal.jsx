@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../../styles/productcart.scss';
 import manufacturer from '../../img/manufacturer_name1.svg';
 import { useProductCart } from '../ProductCart/ProductCart';
@@ -7,13 +7,6 @@ import { Link } from 'react-router-dom';
 function CartModal({ toShow }) {
 
   const myCart = useProductCart();
-
-  console.log("Link in CartModal", myCart.cartVisible);
-  console.log("state in CartModal", toShow);
-
-  useEffect(() => {
-    console.log("CartModal Mount!!!!!!!!!");
-  });
 
 
   // cartVisible: isCartVisible,

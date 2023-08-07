@@ -16,9 +16,30 @@ function ProductCartProvider({ children }) {
   }
 
   function addToCart(product) {
-    const newItem = [...productCart, product];
-    setProductCart(newItem);
+    let found = false;
+    if (productCart.length === 0) {
+      const newItem = [...productCart, { ...product, incart: 1 }];
+      setProductCart(newItem);
+    } else {
+      productCart.forEach((item, index) => {
+        if (item.id === product.id) {
+          found = true;
+          const changedItem = { ...item, incart: (item.incart + 1) }
+          const newItem = [...productCart];
+          newItem[index] = changedItem;
+          setProductCart(newItem);
+        } else {
+          if (!found) {
+            const newItem = [...productCart, { ...product, incart: 1 }];
+            setProductCart(newItem);
+          }
+        }
+      });
+    }
+    // const newItem = [...productCart, { ...product, incart: 1 }];
+    // setProductCart(newItem);
   }
+
 
   return (
     <CartContext.Provider value={{
@@ -29,7 +50,7 @@ function ProductCartProvider({ children }) {
     }}>
       {children}
     </CartContext.Provider>
-  )
+  );
 }
 
 export default ProductCartProvider;
