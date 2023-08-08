@@ -36,18 +36,31 @@ function ProductCartProvider({ children }) {
         }
       });
     }
-    // const newItem = [...productCart, { ...product, incart: 1 }];
-    // setProductCart(newItem);
   }
-  console.log(productCart);
+  function incrementProductInCart(product, index) {
+    const changedItem = { ...product, incart: (product.incart + 1) }
+    const newItem = [...productCart];
+    newItem[index] = changedItem;
+    setProductCart(newItem);
 
+  }
+  function decrementProductInCart(product, index) {
+    if (product.incart > 1) {
+      const changedItem = { ...product, incart: (product.incart - 1) }
+      const newItem = [...productCart];
+      newItem[index] = changedItem;
+      setProductCart(newItem);
+    }
+  }
 
   return (
     <CartContext.Provider value={{
       cart: productCart,
       addToCart,
       cartVisible: isCartVisible,
-      cartVisibleToggle: cartVisibilityToggle
+      cartVisibleToggle: cartVisibilityToggle,
+      addProduct: incrementProductInCart,
+      removeProduct: decrementProductInCart
     }}>
       {children}
     </CartContext.Provider>

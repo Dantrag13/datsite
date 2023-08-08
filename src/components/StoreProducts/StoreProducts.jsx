@@ -25,7 +25,7 @@ function StoreProducts({ products }) {
               </div>
             </li>
           </Link>
-        )
+        );
       })
       }
     </ul>

@@ -9,6 +9,7 @@ import './styles/App.scss';
 import ProductCartProvider from './components/ProductCart/ProductCart';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import OrderComplete from './components/OrderComplete/OrderComplete';
+import OrderVerification from './components/OrderVerification/OrderVerification';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
       <ProductCartProvider>
         <Header />
         <Routes>
-          <Route path='/' element={<Main />} />
+          <Route path='/order-verifivation' element={<Main />} />
+          <Route path='/' element={<OrderVerification />} />
           <Route path='/store' element={<GoodsStore />} >
             <Route index element={<GoodsStore />} />
             <Route path='seeds' element={<GoodsStore />} />
@@ -25,8 +27,9 @@ function App() {
             <Route path='feed-group' element={<GoodsStore />} />
             <Route path='agro-to-help' element={<GoodsStore />} />
           </Route>
-          <Route path='/order-complete' element={<OrderComplete />} />
           <Route path='/product' element={<ProductPage />} />
+          <Route path='/order-complete' element={<OrderComplete />} />
+          {/* <Route path='/order-verifivation' element={<OrderVerification />} /> */}
           <Route path='*' element={<Main />} />
         </Routes>
         <Footer />

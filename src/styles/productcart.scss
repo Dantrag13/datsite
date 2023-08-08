@@ -25,6 +25,7 @@
   background-color: rgba(244, 238, 236, 1);
   border-radius: 20px;
   position: relative;
+  max-height: 86%;
 
   @media screen and (max-width: 620px) {
     padding: 20px;
@@ -70,7 +71,7 @@
 }
 
 .modal__scroll__container {
-  max-height: 84vh;
+  max-height: 64vh;
   overflow-y: auto;
 }
 
@@ -221,7 +222,7 @@
 .quantity__wrapper {
   display: flex;
   align-items: center;
-  margin-left: 120px;
+  margin-left: auto;
   padding-right: 40px;
 
   @media screen and (max-width: 1060px) {
@@ -247,7 +248,7 @@
   font-weight: 700;
 }
 
-.quantity__decriment {
+.quantity__decrement {
   display: flex;
   justify-content: center;
   align-items: center;
