@@ -1,8 +1,61 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
+
 import '../../styles/orderverification.scss';
 import { useProductCart } from '../ProductCart/ProductCart';
 
 function OrderVerification() {
+
+  const [formData, setFormData] = useState({
+    clientName: '',
+    clientSurename: '',
+    phone: '',
+    email: '',
+    commentary: '',
+    region: '',
+    city: '',
+    postOffice: '',
+    postIndex: '',
+    paymentMethod: '',
+  });
+  // console.log(formData);
+
+
+  function setClientName(elem) {
+    console.log(elem.target.value);
+    setFormData({ ...formData, clientName: elem.target.value });
+  }
+  function setClientSurename(elem) {
+    setFormData({ ...formData, clientSurename: elem.target.value });
+  }
+  function setClientPhone(elem) {
+    setFormData({ ...formData, phone: elem.target.value });
+  }
+  function setClientEmail(elem) {
+    setFormData({ ...formData, email: elem.target.value });
+  }
+  function setRegion(elem) {
+    setFormData({ ...formData, region: elem.value });
+  }
+  function setCity(elem) {
+    setFormData({ ...formData, city: elem.value });
+  }
+  function setPostOffice(elem) {
+    setFormData({ ...formData, postOffice: elem.value });
+  }
+  function setPostIndex(elem) {
+    setFormData({ ...formData, postIndex: elem.target.value });
+  }
+
+  useEffect(() => {
+    if (formData.clientName.length < 3) {
+      console.log('less than 3'); return;
+    } else {
+      let testt = (/^[а-я'іїє]+(?:[ -]{1}[а-я'іїє]*)?$/i).test(formData.clientName);
+      console.log(testt);
+    }
+  });
+
 
   const myCart = useProductCart();
 
@@ -20,6 +73,61 @@ function OrderVerification() {
   }
   const summ = cartSummary();
 
+
+  const region__options = [
+    { value: 'none', label: 'Область', isDisabled: true, isFixed: true },
+    { value: 'kyivska', label: 'Київська' },
+    { value: 'odeska', label: 'Одеська' },
+    { value: 'lvivska', label: 'Львівська' },
+    { value: 'kharkivska', label: 'Харківська' },
+
+  ];
+  const city__options = [
+    { value: 'none', label: 'Город', isDisabled: true, isFixed: true },
+    { value: 'kyiv', label: 'Київ' },
+    { value: 'odesa', label: 'Одеса' },
+    { value: 'lviv', label: 'Львів' },
+    { value: 'kharkiv', label: 'Харків' },
+
+  ];
+  const postOffice__options = [
+    { value: 'none', label: 'Відділеня', isDisabled: true, isFixed: true },
+    { value: '129', label: '129 Відділення' },
+    { value: '133', label: '133 Відділення' },
+    { value: '144', label: '144 Відділення' },
+    { value: '99', label: '99 Відділення' },
+
+  ];
+
+  const select__styles = {
+    control: (styles, state) => ({
+      ...styles,
+      borderRadius: "20px",
+      width: "100%",
+      height: "40px",
+      outline: "#84C551",
+      color: "#84C551",
+      boxShadow: "none",
+      'active': {
+        borderColor: "#84C551",
+        outline: "none",
+      },
+      '&:hover': { borderColor: "#84C551" },
+
+    }),
+    valueContainer: (provided, state) => ({
+      ...provided,
+      padding: "2px 16px",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#84C551" : '',
+      '&:hover': { backgroundColor: "#b5e58f" },
+      '&:active': { backgroundColor: "#84C551" },
+
+    })
+  }
+
   return (
     <div className="order-verify">
       <div className="wrapper-main order-verify__wrapper">
@@ -29,10 +137,10 @@ function OrderVerification() {
             <form className="order-verify__form">
               <div className="order__form__contacts-title">Ваші контакти</div>
               <div className="order__form__contacts__wrapper">
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="Ім’я" /></div>
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="Фамілія" /></div>
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="Телефон" /></div>
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="E-mail" /></div>
+                <div className="order__form__contacts__inputs"><input type="text" placeholder="Ім’я" value={formData.clientName} onChange={setClientName} /></div>
+                <div className="order__form__contacts__inputs"><input type="text" placeholder="Фамілія" value={formData.clientSurename} onChange={setClientSurename} /></div>
+                <div className="order__form__contacts__inputs"><input type="text" placeholder="Телефон" value={formData.phone} onChange={setClientPhone} /></div>
+                <div className="order__form__contacts__inputs"><input type="text" placeholder="E-mail" value={formData.email} onChange={setClientEmail} /></div>
               </div>
               <div className="order__form__contacts__textarea">
                 <textarea name="" placeholder="Коментарій"></textarea>
@@ -41,21 +149,15 @@ function OrderVerification() {
               <div className="order__form__delivery-title">Доставка</div>
               <div className="order__form__selects__container">
                 <div className="order__form__delivery__selects">
-                  <select name="noname" id="" placeholder="Поштовий індекс">
-                    <option value="placeholder">hallo!</option>
-                  </select>
+                  <Select options={region__options} onChange={setRegion} styles={select__styles} placeholder={"Область"} />
                 </div>
                 <div className="order__form__delivery__selects">
-                  <select name="noname" id="" placeholder="Поштовий індекс">
-                    <option value="placeholder">hallo!</option>
-                  </select>
+                  <Select options={city__options} onChange={setCity} styles={select__styles} placeholder={"Город"} />
                 </div>
                 <div className="order__form__delivery__selects">
-                  <select name="noname" id="" placeholder="Поштовий індекс">
-                    <option value="placeholder">hallo!</option>
-                  </select>
+                  <Select options={postOffice__options} onChange={setPostOffice} styles={select__styles} placeholder={"Відділеня"} />
                 </div>
-                <div className="order__form__delivery__input"><input type="text" placeholder="Поштовий індекс" /></div>
+                <div className="order__form__delivery__input"><input type="text" placeholder="Поштовий індекс" value={formData.postIndex} onChange={setPostIndex} /></div>
               </div>
               <hr className="style-hr" />
               <div className="order__form__payment-title">Оплата</div>

@@ -4,7 +4,6 @@ import '../../styles/goodsStore.scss';
 import Filters from '../Filters/Filters';
 import Pagination from '../Pagination/Pagination';
 import StoreProducts from '../StoreProducts/StoreProducts';
-
 import data from '../../storeData/seeds.json';
 import PreFooter from '../PreFooter/PreFooter';
 
