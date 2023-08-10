@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
-
 import '../../styles/orderverification.scss';
 import { useProductCart } from '../ProductCart/ProductCart';
 
@@ -18,7 +17,16 @@ function OrderVerification() {
     postIndex: '',
     paymentMethod: '',
   });
-  // console.log(formData);
+  console.log(formData);
+
+  const [inputBorderColor, setInputBorderColor] = useState({
+    clientName: '',
+    clientSurename: '',
+    phone: '',
+    email: '',
+    postIndex: '',
+  });
+
 
 
   function setClientName(elem) {
@@ -46,15 +54,63 @@ function OrderVerification() {
   function setPostIndex(elem) {
     setFormData({ ...formData, postIndex: elem.target.value });
   }
+  function setCommentary(elem) {
+    setFormData({ ...formData, commentary: elem.target.value });
+  }
 
-  useEffect(() => {
+  function nameValidation() {
     if (formData.clientName.length < 3) {
-      console.log('less than 3'); return;
+      // console.log('less than 3');
+      setInputBorderColor({ ...inputBorderColor, clientName: '' });
+    } else if ((/^[а-я'іїє]+(?:[ -]{1}[а-я'іїє]*)?$/i).test(formData.clientName)) {
+      // console.log("green class");
+      setInputBorderColor({ ...inputBorderColor, clientName: 'green' });
     } else {
-      let testt = (/^[а-я'іїє]+(?:[ -]{1}[а-я'іїє]*)?$/i).test(formData.clientName);
-      console.log(testt);
+      // console.log("red class");
+      setInputBorderColor({ ...inputBorderColor, clientName: 'red' });
     }
-  });
+
+  }
+  function surNameValidation() {
+    if (formData.clientSurename.length < 3) {
+      // console.log('less than 3');
+      setInputBorderColor({ ...inputBorderColor, clientSurename: '' });
+    } else if ((/^[а-я'іїє]+(?:[ -]{1}[а-я'іїє]*)?$/i).test(formData.clientSurename)) {
+      // console.log("green class");
+      setInputBorderColor({ ...inputBorderColor, clientSurename: 'green' });
+    } else {
+      // console.log("red class");
+      setInputBorderColor({ ...inputBorderColor, clientSurename: 'red' });
+    }
+  }
+  function phoneValidation() {
+    if (formData.phone.length < 3) {
+      // console.log('less than 3');
+      setInputBorderColor({ ...inputBorderColor, phone: '' });
+    } else if ((/^[\+]380\d{2}\d{3}\d{2}\d{2}$/i).test(formData.phone)) {
+      // console.log("green class");
+      setInputBorderColor({ ...inputBorderColor, phone: 'green' });
+    } else {
+      // console.log("red class");
+      setInputBorderColor({ ...inputBorderColor, phone: 'red' });
+    }
+  }
+  function emailValidation() {
+    if (formData.email.length < 3) {
+      // console.log('less than 3');
+      setInputBorderColor({ ...inputBorderColor, email: '' });
+    } else if ((/^[a-z0-9_.]{3,}@[a-z.0-9]{2,}\.[a-z.]{2,10}$/i).test(formData.email)) {
+      // console.log("green class");
+      setInputBorderColor({ ...inputBorderColor, email: 'green' });
+    } else {
+      // console.log("red class");
+      setInputBorderColor({ ...inputBorderColor, email: 'red' });
+    }
+  }
+
+  function paymentTypeHandler(elem) {
+    setFormData({ ...formData, paymentMethod: elem.target.value });
+  }
 
 
   const myCart = useProductCart();
@@ -137,13 +193,13 @@ function OrderVerification() {
             <form className="order-verify__form">
               <div className="order__form__contacts-title">Ваші контакти</div>
               <div className="order__form__contacts__wrapper">
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="Ім’я" value={formData.clientName} onChange={setClientName} /></div>
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="Фамілія" value={formData.clientSurename} onChange={setClientSurename} /></div>
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="Телефон" value={formData.phone} onChange={setClientPhone} /></div>
-                <div className="order__form__contacts__inputs"><input type="text" placeholder="E-mail" value={formData.email} onChange={setClientEmail} /></div>
+                <div className="order__form__contacts__inputs"><input className={inputBorderColor.clientName} type="text" placeholder="Ім’я" value={formData.clientName} onChange={setClientName} onBlur={nameValidation} /></div>
+                <div className="order__form__contacts__inputs"><input className={inputBorderColor.clientSurename} type="text" placeholder="Фамілія" value={formData.clientSurename} onChange={setClientSurename} onBlur={surNameValidation} /></div>
+                <div className="order__form__contacts__inputs"><input className={inputBorderColor.phone} type="text" placeholder="Телефон" value={formData.phone} onChange={setClientPhone} onBlur={phoneValidation} /></div>
+                <div className="order__form__contacts__inputs"><input className={inputBorderColor.email} type="text" placeholder="E-mail" value={formData.email} onChange={setClientEmail} onBlur={emailValidation} /></div>
               </div>
               <div className="order__form__contacts__textarea">
-                <textarea name="" placeholder="Коментарій"></textarea>
+                <textarea name="" placeholder="Коментарій" value={formData.commentary} onChange={setCommentary}></textarea>
               </div>
               <hr className="style-hr" />
               <div className="order__form__delivery-title">Доставка</div>
@@ -163,15 +219,15 @@ function OrderVerification() {
               <div className="order__form__payment-title">Оплата</div>
               <div className="order__form__radio__container">
                 <label className="form-control order__form__label">
-                  <input type="radio" name="radio" className="order__form__input" />
+                  <input type="radio" name="radio" className="order__form__input" value="Готівка" onChange={paymentTypeHandler} />
                   Готівка
                 </label>
                 <label className="form-control order__form__label">
-                  <input type="radio" name="radio" className="order__form__input" />
+                  <input type="radio" name="radio" className="order__form__input" value="Оплата картою" onChange={paymentTypeHandler} />
                   Оплата картою
                 </label>
                 <label className="form-control order__form__label">
-                  <input type="radio" name="radio" className="order__form__input" />
+                  <input type="radio" name="radio" className="order__form__input" value="Оплата картою онлайн" onChange={paymentTypeHandler} />
                   Оплата картою онлайн
                 </label>
               </div>
