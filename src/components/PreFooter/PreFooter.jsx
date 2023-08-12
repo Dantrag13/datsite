@@ -6,7 +6,7 @@ function PreFooter() {
     <div className="seedfooter__container">
       <div className="wrapper-main seedfooter__wrapper">
         <div className="seedfooter__content">
-          <h2 className="seedfooter__titel">Семена</h2>
+          <h2 className="seedfooter__titel">Насіння</h2>
           <p className="seedfooter__text">Вирощування овочів, квітів на своїй ділянці або просто на балконі - це улюблене
             заняття багатьох дачників та городників. Звичайно, свіжі овочі з власного городу натуральні, смачні та корисні.
             Але щоб отримати хороший урожай томату або капусти, насолоджуватися цвітінням петунії або троянди, важливо не

@@ -6,7 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import StoreProducts from '../StoreProducts/StoreProducts';
 import data from '../../storeData/seeds.json';
 import PreFooter from '../PreFooter/PreFooter';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 
 
@@ -14,44 +14,21 @@ function GoodsStore() {
 
   const location = useLocation();
   const pageTitle = (Boolean(location.state)) ? location.state.title : "Наші товари";
-  let { sectionId } = useParams();
-  console.log(sectionId);
+
 
   const [productsList, setProductsList] = useState([]);
   const [isFiltersAvtive, setIsFiltersActive] = useState(false);
-  // const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([]);
   const [selectedSort, setSelectedSort] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  // console.log(selectedFilters);
-
-  const [searchParams, setSearchParams] = useSearchParams({
-    page: 2,
-    filters: ['bayer', 'basf', 'nertus', 'gzd'],
-    sort: 'name'
-  });
-  console.log(searchParams);
-  // console.log(searchParams.forEach(e => { console.log(e); }));
-  console.log(Object.fromEntries([...searchParams]));
-
-  // filters: 'bayer_basf_nertus',
-
-  // console.log("page - ", searchParams.get('page'));
-  // console.log("filter - ", searchParams.get('filter'));
-  // console.log("sort - ", searchParams.get('sort'));
-
-
-
-
-
-
   const filltersList = [
-    { name: 'manufacturer', value: 'nertus', children: 'Нертус' },
-    { name: 'manufacturer', value: 'basf', children: 'Басф' },
-    { name: 'manufacturer', value: 'adama-ukraine', children: 'Адама Україна' },
-    { name: 'manufacturer', value: 'bayer', children: 'Байєр' },
-    { name: 'manufacturer', value: 'gzd', children: 'ГЗД' },
-    { name: 'manufacturer', value: 'shtefs', children: 'Штефес' },
+    { name: 'manufacturer', value: 'Нертус', children: 'Нертус' },
+    { name: 'manufacturer', value: 'Басф', children: 'Басф' },
+    { name: 'manufacturer', value: 'Адама Україна', children: 'Адама Україна' },
+    { name: 'manufacturer', value: 'Байєр', children: 'Байєр' },
+    { name: 'manufacturer', value: 'ГЗД', children: 'ГЗД' },
+    { name: 'manufacturer', value: 'Штефес', children: 'Штефес' },
   ];
 
   const select__options = [
@@ -100,54 +77,19 @@ function GoodsStore() {
   }
 
 
-  // function filtersSelectionHandler({ value, isActive }) {
-  //   if (isActive) {
-  //     setSelectedFilters((selectedFilters) => [...selectedFilters, value]);
-  //   } else {
-  //     setSelectedFilters(() => ([...selectedFilters].filter(item => item !== value)));
-  //   }
-  // }
-
-  function filtersSelectionHandler2({ value, isActive }) {
-    const newSearchParams = Object.fromEntries([...searchParams]);
-    const getFilters = (newSearchParams.filters) ? (newSearchParams.filters.split("_")) : [];
-
-    // console.log(value, isActive);
-    // console.log(newSearchParams);
-    // console.log(Boolean(newFilters));
-    // console.log(newFilters);
+  function filtersSelectionHandler({ value, isActive }) {
     if (isActive) {
-      const newFilters = [...getFilters, value].join("_");
-      // console.log(newFilters);
-      const updatedSearchParams = { ...newSearchParams, filters: newFilters };
-      // console.log("x = ", updatedSearchParams);
-      setSearchParams(updatedSearchParams);
-    }
-    if (isActive === false) {
-      const newFilters = [...getFilters].filter(item => item !== value);
-      // console.log(newFilters);
-      if (newFilters.length > 0) {
-        const updatedSearchParams = { ...newSearchParams, filters: (newFilters.join("_")) };
-        // console.log(updatedSearchParams);
-        setSearchParams(updatedSearchParams);
-      } else {
-        const { filters, ...updatedSearchParams } = newSearchParams;
-        setSearchParams(updatedSearchParams);
-      }
-
-      // console.log(newFilters);
+      setSelectedFilters((selectedFilters) => [...selectedFilters, value]);
+    } else {
+      setSelectedFilters(() => ([...selectedFilters].filter(item => item !== value)));
     }
   }
 
-
-
   function filteredProductsList() {
-    let selectedFilters = (searchParams.get("filters"));
-    if (selectedFilters !== null) {
-      console.log("Фильтрация в функции", selectedFilters);
-      selectedFilters = selectedFilters.split("_");
+    if (selectedFilters.length > 0) {
       return [...productsList].filter((product) => (selectedFilters.includes(product.manufacturer)));
-    } else {
+    }
+    else {
       return productsList;
     }
   }
@@ -189,11 +131,11 @@ function GoodsStore() {
       <div className="products-store__wrapper">
         <div className="wrapper-main products-store__wrapper">
           <h2 className="products-store__title title__2leaves">{pageTitle}</h2>
-          {/* <button className="my__button" onClick={() => { setSearchParams({ ...searchParams, page: 2 }) }}>Search Params Test</button>
-          <button className="my__button" onClick={() => { setSearchParams({ page: 1, filters: 'bayer_basf_nertus', sort: '' }) }}>Search Params Test</button>
-          <button className="my__button" onClick={() => { setSearchParams({ sort: "name" }) }}>Search Params Test</button> */}
+          <button className="my__button" onClick={() => { setSearchParams({ ...searchParams, page: 2 }) }}>Search Params Test</button>
+          <button className="my__button" onClick={() => { setSearchParams({ page: 1, filter: "Ythnec", sort: '' }) }}>Search Params Test</button>
+          <button className="my__button" onClick={() => { setSearchParams({ sort: "name" }) }}>Search Params Test</button>
           <div className="products-store__main-container">
-            <Filters filters={filltersList} title={'Виробник'} searchParams={searchParams} toggleFilters={toggleFilters} isActive={isFiltersAvtive} filtersHandler={filtersSelectionHandler2} />
+            <Filters filters={filltersList} title={'Виробник'} toggleFilters={toggleFilters} isActive={isFiltersAvtive} filtersHandler={filtersSelectionHandler} />
             <div className="products-store__products-container">
               <div className="products-store__select-container">
                 <button className="filter__sidebar-toggle-btn" onClick={toggleFilters}>Фільтр</button>

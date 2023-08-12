@@ -17,19 +17,19 @@ function App() {
       <ProductCartProvider>
         <Header />
         <Routes>
-          <Route path='/order-verifivation' element={<Main />} />
-          <Route path='/' element={<OrderVerification />} />
+          <Route path='/' element={<Main />} />
           <Route path='/store' element={<GoodsStore />} >
             <Route index element={<GoodsStore />} />
-            <Route path='seeds' element={<GoodsStore />} />
+            <Route path='/store/:sectionId' element={<GoodsStore />} />
+            {/* <Route path='seeds' element={<GoodsStore />} />
             <Route path='plant-protection' element={<GoodsStore />} />
             <Route path='fertilizers' element={<GoodsStore />} />
             <Route path='feed-group' element={<GoodsStore />} />
-            <Route path='agro-to-help' element={<GoodsStore />} />
+            <Route path='agro-to-help' element={<GoodsStore />} /> */}
           </Route>
-          <Route path='/product' element={<ProductPage />} />
+          <Route path=':productId' element={<ProductPage />} />
+          <Route path='/order-verifivation' element={<OrderVerification />} />
           <Route path='/order-complete' element={<OrderComplete />} />
-          {/* <Route path='/order-verifivation' element={<OrderVerification />} /> */}
           <Route path='*' element={<Main />} />
         </Routes>
         <Footer />

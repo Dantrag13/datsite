@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Filters({ filters, title, isActive, toggleFilters, filtersHandler }) {
+function Filters({ filters, title, isActive, toggleFilters, filtersHandler, searchParams }) {
 
   const body = document.querySelector('body');
 
@@ -22,6 +22,12 @@ function Filters({ filters, title, isActive, toggleFilters, filtersHandler }) {
     }
   }
 
+  // console.log(searchParams.get("filters"));
+
+  // console.log(searchParams.get("filters").split("_"));
+
+  const checkedPositions = Boolean(searchParams.get("filters")) ? searchParams.get("filters").split("_") : [""];
+
   return (
     <div className={isActive ? "blure__filter-bg active" : "blure__filter-bg"} onClick={closeFiltersHandler}>
       <div className={isActive ? "products-store__filters-container active" : "products-store__filters-container"}>
@@ -34,7 +40,14 @@ function Filters({ filters, title, isActive, toggleFilters, filtersHandler }) {
           {filters.map(filter => {
             return (
               <label key={filter.value} className="form-control product__filter__label">
-                <input className="product__filter__checkbox" type="checkbox" name={filter.name} value={filter.value} />
+                <input
+                  className="product__filter__checkbox"
+                  type="checkbox"
+                  name={filter.name}
+                  value={filter.value}
+                  checked={(checkedPositions.includes(filter.value)) ? true : false}
+                  onChange={(e) => { filtersHandler(e.target.value, e.target.checked); }}
+                />
                 {filter.children}
               </label>
             )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import '../../styles/orderverification.scss';
 import { useProductCart } from '../ProductCart/ProductCart';
@@ -17,20 +18,15 @@ function OrderVerification() {
     postIndex: '',
     paymentMethod: '',
   });
-  console.log(formData);
 
   const [inputBorderColor, setInputBorderColor] = useState({
     clientName: '',
     clientSurename: '',
     phone: '',
     email: '',
-    postIndex: '',
   });
 
-
-
   function setClientName(elem) {
-    console.log(elem.target.value);
     setFormData({ ...formData, clientName: elem.target.value });
   }
   function setClientSurename(elem) {
@@ -60,56 +56,71 @@ function OrderVerification() {
 
   function nameValidation() {
     if (formData.clientName.length < 3) {
-      // console.log('less than 3');
       setInputBorderColor({ ...inputBorderColor, clientName: '' });
     } else if ((/^[а-я'іїє]+(?:[ -]{1}[а-я'іїє]*)?$/i).test(formData.clientName)) {
-      // console.log("green class");
       setInputBorderColor({ ...inputBorderColor, clientName: 'green' });
     } else {
-      // console.log("red class");
       setInputBorderColor({ ...inputBorderColor, clientName: 'red' });
     }
 
   }
+
   function surNameValidation() {
     if (formData.clientSurename.length < 3) {
-      // console.log('less than 3');
       setInputBorderColor({ ...inputBorderColor, clientSurename: '' });
     } else if ((/^[а-я'іїє]+(?:[ -]{1}[а-я'іїє]*)?$/i).test(formData.clientSurename)) {
-      // console.log("green class");
       setInputBorderColor({ ...inputBorderColor, clientSurename: 'green' });
     } else {
-      // console.log("red class");
       setInputBorderColor({ ...inputBorderColor, clientSurename: 'red' });
     }
   }
+
   function phoneValidation() {
     if (formData.phone.length < 3) {
-      // console.log('less than 3');
       setInputBorderColor({ ...inputBorderColor, phone: '' });
-    } else if ((/^[\+]380\d{2}\d{3}\d{2}\d{2}$/i).test(formData.phone)) {
-      // console.log("green class");
+    } else if ((/^[+]380\d{2}\d{3}\d{2}\d{2}$/i).test(formData.phone)) {
       setInputBorderColor({ ...inputBorderColor, phone: 'green' });
     } else {
-      // console.log("red class");
       setInputBorderColor({ ...inputBorderColor, phone: 'red' });
     }
   }
+
   function emailValidation() {
     if (formData.email.length < 3) {
-      // console.log('less than 3');
       setInputBorderColor({ ...inputBorderColor, email: '' });
     } else if ((/^[a-z0-9_.]{3,}@[a-z.0-9]{2,}\.[a-z.]{2,10}$/i).test(formData.email)) {
-      // console.log("green class");
       setInputBorderColor({ ...inputBorderColor, email: 'green' });
     } else {
-      // console.log("red class");
       setInputBorderColor({ ...inputBorderColor, email: 'red' });
     }
   }
 
   function paymentTypeHandler(elem) {
     setFormData({ ...formData, paymentMethod: elem.target.value });
+  }
+
+  const navigate = useNavigate();
+
+  function sendData() {
+    navigate("order-complete");
+  }
+
+  function confirmOrder() {
+    let isAlert = false;
+    for (const elem in inputBorderColor) {
+      if (inputBorderColor[elem] !== 'green') {
+        isAlert = true;
+        break;
+      }
+    }
+    for (const elem in formData) {
+      if ((elem !== "commentary") && (formData[elem].length === 0)) {
+        isAlert = true;
+        break;
+      }
+    }
+    if (isAlert) { alert("Будьласка, заповніть усі поля"); }
+    else { sendData(); }
   }
 
 
@@ -236,14 +247,14 @@ function OrderVerification() {
           <div className="order-verify__in-cart__container">
             <div className="order-verify__title">Товари у кошику</div>
             <ul className="order-verify__list">
-              {Boolean(myCart.cart.length === 0) ? ""
+              {Boolean(myCart.cart.length === 0) ? <div>Кошик пустий</div>
                 :
                 myCart.cart.map((item) => {
                   return (
                     <li className="order-verify__item" key={item.id}>
                       <div className="order-verify__item__title-style">
                         <div className="order-verify__item__title">{item.name}</div>
-                        <button className="order-verify__item__btn">X</button>
+                        <button className="order-verify__item__btn" onClick={() => { myCart.deleteProduct(item.id) }}>X</button>
                       </div>
                       <div className="order-verify__item__image-price-style">
                         <div className="order-verify__item__image"><img src={item.images[0]} alt={item.name} /></div>
@@ -259,11 +270,11 @@ function OrderVerification() {
               <div className="order__items">Разом: <span>{myCart.cart.length} товари</span></div>
               <div className="order__price">На суму: <span>{summ} грн</span></div>
             </div>
-            <button className="order-verify__confirm__btn">Підтвердити заказ</button>
+            <button className="order-verify__confirm__btn" onClick={confirmOrder}>Підтвердити заказ</button>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
