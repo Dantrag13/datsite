@@ -21,11 +21,6 @@ function App() {
           <Route path='/store' element={<GoodsStore />} >
             <Route index element={<GoodsStore />} />
             <Route path='/store/:sectionId' element={<GoodsStore />} />
-            {/* <Route path='seeds' element={<GoodsStore />} />
-            <Route path='plant-protection' element={<GoodsStore />} />
-            <Route path='fertilizers' element={<GoodsStore />} />
-            <Route path='feed-group' element={<GoodsStore />} />
-            <Route path='agro-to-help' element={<GoodsStore />} /> */}
           </Route>
           <Route path=':productId' element={<ProductPage />} />
           <Route path='/order-verifivation' element={<OrderVerification />} />

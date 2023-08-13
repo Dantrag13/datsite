@@ -1,6 +1,6 @@
-import React from 'react'
-import '../../styles/mainaboutus.scss'
-import farmer_with_soil from '../../img/mainaboutus-img.jpg'
+import React from 'react';
+import '../../styles/mainaboutus.scss';
+import farmer_with_soil from '../../img/mainaboutus-img.jpg';
 
 function MainAboutUs() {
   return (
@@ -35,7 +35,7 @@ function MainAboutUs() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default MainAboutUs
+export default MainAboutUs;

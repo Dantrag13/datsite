@@ -1,5 +1,5 @@
-import React from 'react'
-import "../../styles/mainshop.scss"
+import React from 'react';
+import "../../styles/mainshop.scss";
 
 function MainShop() {
   return (
@@ -20,7 +20,7 @@ function MainShop() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default MainShop
+export default MainShop;

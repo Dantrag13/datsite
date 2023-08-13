@@ -99,7 +99,7 @@ function ProductInfo() {
         </div>
       </div>
     </div >
-  )
+  );
 }
 
-export default ProductInfo
+export default ProductInfo;

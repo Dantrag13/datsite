@@ -1,10 +1,10 @@
-import React from 'react'
-import '../../styles/footer.scss'
-import arrow from "../../img/arrow.svg"
-import email_ico from "../../img/email-ico.svg"
-import logo from "../../img/logo.svg"
-import phone_ico from "../../img/phone-ico.svg"
-import { Link } from 'react-router-dom'
+import React from 'react';
+import '../../styles/footer.scss';
+import arrow from "../../img/arrow.svg";
+import email_ico from "../../img/email-ico.svg";
+import logo from "../../img/logo.svg";
+import phone_ico from "../../img/phone-ico.svg";
+import { Link } from 'react-router-dom';
 
 function Footer() {
 
@@ -16,23 +16,23 @@ function Footer() {
       <div className="wrapper-main footer__wprapper">
         <div className="footer__content__style__container">
           <div className="footer__content__style footer__style__logo">
-            <Link className="footer__logo__link" to='./'><img src={logo} alt="logo" /></Link>
+            <Link className="footer__logo__link" to='./'><img src={logo} alt="logo" onClick={smoothScrollTop} /></Link>
             <div className="footer__logo__text">Пропонуємо покупцям широкий вибір насіння овочів</div>
           </div>
           <div className="footer__content__style footer__style__info-goods">
             <div className="footer__col__info">
               <h5 className="info__title">Інформація</h5>
-              <div className="info__item"><Link className="info__link" to='./'>Про компанію</Link></div>
-              <div className="info__item"><Link className="info__link" to='./'>Оплата і доставка</Link></div>
-              <div className="info__item"><Link className="info__link" to='./'>Партнери</Link></div>
+              <div className="info__item"><Link className="info__link" to='./' onClick={smoothScrollTop}>Про компанію</Link></div>
+              <div className="info__item"><Link className="info__link" to='./' onClick={smoothScrollTop}>Оплата і доставка</Link></div>
+              <div className="info__item"><Link className="info__link" to='./' onClick={smoothScrollTop}>Партнери</Link></div>
             </div>
             <div className="footer__col__goods">
               <h5 className="goods__title">Товари</h5>
-              <div className="goods__item"><Link className="goods__link" to='/store'>Каталог продукції</Link></div>
-              <div className="goods__item"><Link className="goods__link" to='/store/plant-protection'>Засоби захисту рослин</Link></div>
-              <div className="goods__item"><Link className="goods__link" to='/store/seeds'>Насіння</Link></div>
-              <div className="goods__item"><Link className="goods__link" to='/store/fertilizers'>Добрива</Link></div>
-              <div className="goods__item"><Link className="goods__link" to='/store/agro-to-help'>Агроному в поміч</Link></div>
+              <div className="goods__item"><Link className="goods__link" to='/store' onClick={smoothScrollTop}>Каталог продукції</Link></div>
+              <div className="goods__item"><Link className="goods__link" to='/store/plant-protection' onClick={smoothScrollTop}>Засоби захисту рослин</Link></div>
+              <div className="goods__item"><Link className="goods__link" to='/store/seeds' onClick={smoothScrollTop}>Насіння</Link></div>
+              <div className="goods__item"><Link className="goods__link" to='/store/fertilizers' onClick={smoothScrollTop}>Добрива</Link></div>
+              <div className="goods__item"><Link className="goods__link" to='/store/agro-to-help' onClick={smoothScrollTop}>Агроному в поміч</Link></div>
             </div>
           </div>
           <div className="footer__content__style footer__style__contacts">
@@ -61,7 +61,7 @@ function Footer() {
         </span>
       </div>
     </div >
-  )
+  );
 }
 
-export default Footer
+export default Footer;

@@ -52,7 +52,7 @@ function HeaderNavbar() {
         </div>
       </div>
     </div >
-  )
+  );
 }
 
 export default HeaderNavbar;

@@ -26,7 +26,7 @@ function PreFooter() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default PreFooter;

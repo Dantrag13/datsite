@@ -1,8 +1,8 @@
-import React from 'react'
-import '../../styles/header.scss'
-import HeaderMarketsbar from '../HeaderMarketsbar/HeaderMarketsbar'
-import HeaderNavbar from '../HeaderNavbar/HeaderNavbar'
-import HeaderSearchbar from '../HeaderSearchbar/HeaderSearchbar'
+import React from 'react';
+import '../../styles/header.scss';
+import HeaderMarketsbar from '../HeaderMarketsbar/HeaderMarketsbar';
+import HeaderNavbar from '../HeaderNavbar/HeaderNavbar';
+import HeaderSearchbar from '../HeaderSearchbar/HeaderSearchbar';
 
 function Header() {
 
@@ -12,7 +12,7 @@ function Header() {
       <HeaderSearchbar></HeaderSearchbar>
       <HeaderMarketsbar></HeaderMarketsbar>
     </header >
-  )
+  );
 }
 
-export default Header
+export default Header;

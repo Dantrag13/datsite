@@ -32,7 +32,7 @@ function HeaderSearchbar() {
         <SearcBarCart />
       </div>
     </div>
-  )
+  );
 }
 
 export default HeaderSearchbar;

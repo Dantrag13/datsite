@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import '../../styles/goodsStore.scss';
 import Filters from '../Filters/Filters';
@@ -6,44 +6,23 @@ import Pagination from '../Pagination/Pagination';
 import StoreProducts from '../StoreProducts/StoreProducts';
 import data from '../../storeData/seeds.json';
 import PreFooter from '../PreFooter/PreFooter';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 
 
 function GoodsStore() {
-
-  const location = useLocation();
-  const pageTitle = (Boolean(location.state)) ? location.state.title : "Наші товари";
-  let { sectionId } = useParams();
-  console.log(sectionId);
-
-  const [productsList, setProductsList] = useState([]);
-  const [isFiltersAvtive, setIsFiltersActive] = useState(false);
-  // const [selectedFilters, setSelectedFilters] = useState([]);
-  const [selectedSort, setSelectedSort] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // console.log(selectedFilters);
-
   const [searchParams, setSearchParams] = useSearchParams({
-    page: 2,
-    filters: ['bayer', 'basf', 'nertus', 'gzd'],
-    sort: 'name'
+    page: 1,
   });
-  console.log(searchParams);
-  // console.log(searchParams.forEach(e => { console.log(e); }));
-  console.log(Object.fromEntries([...searchParams]));
+  const searchToObhect = Object.fromEntries([...searchParams]);
 
-  // filters: 'bayer_basf_nertus',
-
-  // console.log("page - ", searchParams.get('page'));
-  // console.log("filter - ", searchParams.get('filter'));
-  // console.log("sort - ", searchParams.get('sort'));
-
-
-
-
-
+  const [productsList] = useState(() => { return data; });
+  const [isFiltersAvtive, setIsFiltersActive] = useState(false);
+  const [selectedSort, setSelectedSort] = useState(() => {
+    return (Object.fromEntries([...searchParams]).sort !== undefined) ?
+      (Object.fromEntries([...searchParams]).sort) :
+      '';
+  });
 
   const filltersList = [
     { name: 'manufacturer', value: 'nertus', children: 'Нертус' },
@@ -89,53 +68,56 @@ function GoodsStore() {
     })
   }
 
+  const { sectionId } = useParams();
 
-  useEffect(() => {
-    setProductsList(data);
-  }, []);
+  const titleMatch = {
+    "seed": "Насіння",
+    "plant-protection": "Засоби захисту рослин",
+    "fertilizers": "Добрива",
+    "feed-group": "Кормова група",
+    "agro-to-help": "Агроному в поміч",
+  }
+
+  const pageTitle = (sectionId !== undefined) ? titleMatch[sectionId] : "Наші товари";
+
+
+  function sortSelectionHandler(e) {
+    setSelectedSort(e.value);
+    setSearchParams({ ...searchToObhect, sort: e.value });
+  }
+
+  function initialSelectedSort() {
+    let indexNumber = 0;
+    select__options.forEach((elem, index) => {
+      if ((searchToObhect.sort !== undefined) && (elem.value === searchToObhect.sort)) {
+        indexNumber = index;
+      }
+    });
+    return indexNumber;
+  }
 
 
   function toggleFilters() {
     setIsFiltersActive(isFiltersAvtive => !isFiltersAvtive);
   }
 
-
-  // function filtersSelectionHandler({ value, isActive }) {
-  //   if (isActive) {
-  //     setSelectedFilters((selectedFilters) => [...selectedFilters, value]);
-  //   } else {
-  //     setSelectedFilters(() => ([...selectedFilters].filter(item => item !== value)));
-  //   }
-  // }
-
   function filtersSelectionHandler2({ value, isActive }) {
     const newSearchParams = Object.fromEntries([...searchParams]);
-    const getFilters = (newSearchParams.filters) ? (newSearchParams.filters.split("_")) : [];
-
-    // console.log(value, isActive);
-    // console.log(newSearchParams);
-    // console.log(Boolean(newFilters));
-    // console.log(newFilters);
+    const getFilters = (newSearchParams.filters) ? (newSearchParams.filters.split(",")) : [];
     if (isActive) {
-      const newFilters = [...getFilters, value].join("_");
-      // console.log(newFilters);
+      const newFilters = [...getFilters, value].join(",");
       const updatedSearchParams = { ...newSearchParams, filters: newFilters };
-      // console.log("x = ", updatedSearchParams);
       setSearchParams(updatedSearchParams);
     }
     if (isActive === false) {
       const newFilters = [...getFilters].filter(item => item !== value);
-      // console.log(newFilters);
       if (newFilters.length > 0) {
-        const updatedSearchParams = { ...newSearchParams, filters: (newFilters.join("_")) };
-        // console.log(updatedSearchParams);
+        const updatedSearchParams = { ...newSearchParams, filters: (newFilters.join(",")) };
         setSearchParams(updatedSearchParams);
       } else {
         const { filters, ...updatedSearchParams } = newSearchParams;
         setSearchParams(updatedSearchParams);
       }
-
-      // console.log(newFilters);
     }
   }
 
@@ -144,8 +126,7 @@ function GoodsStore() {
   function filteredProductsList() {
     let selectedFilters = (searchParams.get("filters"));
     if (selectedFilters !== null) {
-      console.log("Фильтрация в функции", selectedFilters);
-      selectedFilters = selectedFilters.split("_");
+      selectedFilters = selectedFilters.split(",");
       return [...productsList].filter((product) => (selectedFilters.includes(product.manufacturer)));
     } else {
       return productsList;
@@ -155,13 +136,14 @@ function GoodsStore() {
   const filteredProducts = filteredProductsList();
 
 
+
   function sortedProductList() {
     if (Boolean(selectedSort)) {
-      if (selectedSort.value === 'name') {
-        const x = [...filteredProducts].sort((a, b) => a[selectedSort.value].localeCompare(b[selectedSort.value]));
+      if (selectedSort === 'name') {
+        const x = [...filteredProducts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));
         return x;
-      } else if (selectedSort.value === 'price') {
-        const x = [...filteredProducts].sort((a, b) => a[selectedSort.value] - b[selectedSort.value]);
+      } else if (selectedSort === 'price') {
+        const x = [...filteredProducts].sort((a, b) => a[selectedSort] - b[selectedSort]);
         return x;
       }
     } else {
@@ -175,7 +157,7 @@ function GoodsStore() {
   function curentProductsPageToShow() {
     let arr = [];
     [...sortedfilteredProducts].forEach((elem, index) => {
-      if (index >= ((currentPage - 1) * 15) && index < (currentPage * 15)) {
+      if (index >= ((searchParams.get("page") - 1) * 15) && index < (searchParams.get("page") * 15)) {
         return (arr = [...arr, elem]);
       }
     });
@@ -189,27 +171,23 @@ function GoodsStore() {
       <div className="products-store__wrapper">
         <div className="wrapper-main products-store__wrapper">
           <h2 className="products-store__title title__2leaves">{pageTitle}</h2>
-          {/* <button className="my__button" onClick={() => { setSearchParams({ ...searchParams, page: 2 }) }}>Search Params Test</button>
-          <button className="my__button" onClick={() => { setSearchParams({ page: 1, filters: 'bayer_basf_nertus', sort: '' }) }}>Search Params Test</button>
-          <button className="my__button" onClick={() => { setSearchParams({ sort: "name" }) }}>Search Params Test</button> */}
           <div className="products-store__main-container">
             <Filters filters={filltersList} title={'Виробник'} searchParams={searchParams} toggleFilters={toggleFilters} isActive={isFiltersAvtive} filtersHandler={filtersSelectionHandler2} />
             <div className="products-store__products-container">
               <div className="products-store__select-container">
                 <button className="filter__sidebar-toggle-btn" onClick={toggleFilters}>Фільтр</button>
                 <div className="products-store__select">
-                  <Select options={select__options} onChange={setSelectedSort} styles={select__styles} placeholder={"Сортувати за"} />
+                  <Select options={select__options} defaultValue={select__options[initialSelectedSort()]} onChange={sortSelectionHandler} styles={select__styles} placeholder={"Сортувати за"} />
                 </div>
               </div>
               <StoreProducts products={productsToShow} />
-              <Pagination page={currentPage} setPage={setCurrentPage} numberOfItems={sortedfilteredProducts.length} />
+              <Pagination searchParams={searchParams} currentPage={searchParams.get("page")} setPage={setSearchParams} numberOfItems={sortedfilteredProducts.length} />
             </div>
           </div>
         </div>
       </div>
       <PreFooter />
     </>
-
-  )
+  );
 }
 export default GoodsStore;

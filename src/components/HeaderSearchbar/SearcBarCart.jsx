@@ -51,7 +51,7 @@ function SearcBarCart() {
       <span className="cart__summary">{cartTotalPrice} грн</span>
       <CartModal toShow={showCartModal} />
     </div>
-  )
+  );
 }
 
 export default SearcBarCart;

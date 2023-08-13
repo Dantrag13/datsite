@@ -45,7 +45,7 @@ function CartModal({ toShow }) {
                         </div>
                       </div>
                     </li>
-                  )
+                  );
                 })}
             </ul>
           </div>

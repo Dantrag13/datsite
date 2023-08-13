@@ -18,15 +18,10 @@ function Filters({ filters, title, isActive, toggleFilters, filtersHandler, sear
     if (e.target.tagName === 'INPUT') {
       const selectedFilter = { value: e.target.value, isActive: e.target.checked }
       filtersHandler(selectedFilter);
-      // console.log(selectedFilter);
     }
   }
 
-  // console.log(searchParams.get("filters"));
-
-  // console.log(searchParams.get("filters").split("_"));
-
-  const checkedPositions = Boolean(searchParams.get("filters")) ? searchParams.get("filters").split("_") : [""];
+  const checkedPositions = Boolean(searchParams.get("filters")) ? searchParams.get("filters").split(",") : [""];
 
   return (
     <div className={isActive ? "blure__filter-bg active" : "blure__filter-bg"} onClick={closeFiltersHandler}>
@@ -50,13 +45,13 @@ function Filters({ filters, title, isActive, toggleFilters, filtersHandler, sear
                 />
                 {filter.children}
               </label>
-            )
+            );
           })}
 
         </div>
       </div>
     </div >
-  )
+  );
 }
 
-export default Filters
+export default Filters;

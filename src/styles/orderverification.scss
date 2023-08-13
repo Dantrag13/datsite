@@ -284,8 +284,6 @@
   flex-direction: column;
   margin-top: 26px;
   padding-left: 8px;
-  // max-height: 60%;
-  // overflow-y: auto;
 }
 
 .order-verify__item {
@@ -351,11 +349,6 @@
   margin-top: 30px;
   flex-wrap: wrap;
   gap: 12px;
-
-  // @media screen and (max-width: 930px) {
-  //   flex-direction: column;
-  //   gap: 12px;
-  // }
 }
 
 .order__items,
