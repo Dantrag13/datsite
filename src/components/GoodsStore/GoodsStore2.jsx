@@ -6,7 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import StoreProducts from '../StoreProducts/StoreProducts';
 import data from '../../storeData/seeds.json';
 import PreFooter from '../PreFooter/PreFooter';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -131,9 +131,6 @@ function GoodsStore() {
       <div className="products-store__wrapper">
         <div className="wrapper-main products-store__wrapper">
           <h2 className="products-store__title title__2leaves">{pageTitle}</h2>
-          <button className="my__button" onClick={() => { setSearchParams({ ...searchParams, page: 2 }) }}>Search Params Test</button>
-          <button className="my__button" onClick={() => { setSearchParams({ page: 1, filter: "Ythnec", sort: '' }) }}>Search Params Test</button>
-          <button className="my__button" onClick={() => { setSearchParams({ sort: "name" }) }}>Search Params Test</button>
           <div className="products-store__main-container">
             <Filters filters={filltersList} title={'Виробник'} toggleFilters={toggleFilters} isActive={isFiltersAvtive} filtersHandler={filtersSelectionHandler} />
             <div className="products-store__products-container">

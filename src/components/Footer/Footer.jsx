@@ -30,7 +30,7 @@ function Footer() {
               <h5 className="goods__title">Товари</h5>
               <div className="goods__item"><Link className="goods__link" to='/store' onClick={smoothScrollTop}>Каталог продукції</Link></div>
               <div className="goods__item"><Link className="goods__link" to='/store/plant-protection' onClick={smoothScrollTop}>Засоби захисту рослин</Link></div>
-              <div className="goods__item"><Link className="goods__link" to='/store/seeds' onClick={smoothScrollTop}>Насіння</Link></div>
+              <div className="goods__item"><Link className="goods__link" to='/store/seed' onClick={smoothScrollTop}>Насіння</Link></div>
               <div className="goods__item"><Link className="goods__link" to='/store/fertilizers' onClick={smoothScrollTop}>Добрива</Link></div>
               <div className="goods__item"><Link className="goods__link" to='/store/agro-to-help' onClick={smoothScrollTop}>Агроному в поміч</Link></div>
             </div>
